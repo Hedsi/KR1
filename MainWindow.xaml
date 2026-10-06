@@ -1,0 +1,248 @@
+﻿<Window x:Class="FamilyBudgetAnalysis.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Аналіз сімейного бюджету"
+        Height="750"
+        Width="1250"
+        WindowStartupLocation="CenterScreen">
+
+    <DockPanel>
+
+        <!-- МЕНЮ -->
+        <Menu DockPanel.Dock="Top">
+
+            <!-- Файл -->
+            <MenuItem Header="Файл">
+
+                <MenuItem Header="Відкрити дані"
+                          Click="OpenData_Click"/>
+
+                <MenuItem Header="Зберегти звіт"
+                          Click="SaveReport_Click"/>
+
+                <Separator/>
+
+                <MenuItem Header="Вихід"
+                          Click="Exit_Click"/>
+
+            </MenuItem>
+
+            <!-- Дані -->
+            <MenuItem Header="Дані">
+
+                <MenuItem Header="Додати місяць"
+                          Click="AddMonth_Click"/>
+
+                <MenuItem Header="Видалити місяць"
+                          Click="DeleteMonth_Click"/>
+
+                <MenuItem Header="Очистити дані"
+                          Click="ClearData_Click"/>
+
+            </MenuItem>
+
+            <!-- Розрахунок -->
+            <MenuItem Header="Розрахунок">
+
+                <MenuItem Header="Виконати"
+                          Click="Calculate_Click"/>
+
+                <MenuItem Header="Очистити результати"
+                          Click="ClearResults_Click"/>
+
+            </MenuItem>
+
+            <!-- Налаштування -->
+            <MenuItem Header="Налаштування">
+
+                <MenuItem Header="Формат: 2 знаки"
+                          Click="Format2_Click"/>
+
+                <MenuItem Header="Формат: 0 знаків"
+                          Click="Format0_Click"/>
+
+            </MenuItem>
+
+        </Menu>
+
+        <Grid Margin="15">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- ВЕРХНЯ ПАНЕЛЬ -->
+
+            <Border Grid.Row="0"
+                    BorderBrush="Gray"
+                    BorderThickness="1"
+                    Padding="10"
+                    Margin="0,0,0,10">
+
+                <StackPanel Orientation="Horizontal">
+
+                    <TextBlock Text="Початкові заощадження:"
+                               VerticalAlignment="Center"
+                               Margin="0,0,10,0"/>
+
+                    <TextBox x:Name="InitialSavingsTextBox"
+                             Width="150"
+                             Height="28"
+                             Text="0"/>
+
+                    <Button Content="Додати місяць"
+                            Width="130"
+                            Height="30"
+                            Margin="20,0,5,0"
+                            Click="AddMonth_Click"/>
+
+                    <Button Content="Видалити"
+                            Width="100"
+                            Height="30"
+                            Margin="5,0,5,0"
+                            Click="DeleteMonth_Click"/>
+
+                    <Button Content="Виконати"
+                            Width="100"
+                            Height="30"
+                            Margin="5,0,0,0"
+                            Click="Calculate_Click"/>
+
+                </StackPanel>
+
+            </Border>
+
+            <!-- ТАБЛИЦЯ -->
+
+            <DataGrid x:Name="BudgetDataGrid"
+                      Grid.Row="1"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      SelectionMode="Single"
+                      Margin="0,0,0,10">
+
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn Header="Місяць"
+                                        Binding="{Binding Month}"
+                                        Width="120"/>
+
+                    <DataGridTextColumn Header="Основний дохід"
+                                        Binding="{Binding MainIncome, StringFormat=N2}"
+                                        Width="120"/>
+
+                    <DataGridTextColumn Header="Додатковий дохід"
+                                        Binding="{Binding AdditionalIncome, StringFormat=N2}"
+                                        Width="120"/>
+
+                    <DataGridTextColumn Header="Загальний дохід"
+                                        Binding="{Binding TotalIncome, StringFormat=N2}"
+                                        Width="120"/>
+
+                    <DataGridTextColumn Header="Житло"
+                                        Binding="{Binding Housing, StringFormat=N2}"
+                                        Width="100"/>
+
+                    <DataGridTextColumn Header="Комунальні"
+                                        Binding="{Binding Utilities, StringFormat=N2}"
+                                        Width="110"/>
+
+                    <DataGridTextColumn Header="Транспорт"
+                                        Binding="{Binding Transport, StringFormat=N2}"
+                                        Width="100"/>
+
+                    <DataGridTextColumn Header="Харчування"
+                                        Binding="{Binding Food, StringFormat=N2}"
+                                        Width="110"/>
+
+                    <DataGridTextColumn Header="Інші витрати"
+                                        Binding="{Binding OtherExpenses, StringFormat=N2}"
+                                        Width="110"/>
+
+                    <DataGridTextColumn Header="Загальні витрати"
+                                        Binding="{Binding TotalExpenses, StringFormat=N2}"
+                                        Width="120"/>
+
+                    <DataGridTextColumn Header="Залишок"
+                                        Binding="{Binding Remaining, StringFormat=N2}"
+                                        Width="110"/>
+
+                    <DataGridTextColumn Header="Витрати, %"
+                                        Binding="{Binding ExpenseShare, StringFormat=N2}"
+                                        Width="100"/>
+
+                    <DataGridTextColumn Header="Зміна заощаджень"
+                                        Binding="{Binding SavingsChange, StringFormat=N2}"
+                                        Width="130"/>
+
+                </DataGrid.Columns>
+
+            </DataGrid>
+
+            <!-- РЕЗУЛЬТАТИ -->
+
+            <GroupBox Grid.Row="2"
+                      Header="Підсумкові показники"
+                      Padding="10">
+
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+
+                        <TextBlock x:Name="TotalSavingsText"
+                                   Text="Заощадження на кінець періоду: —"
+                                   FontSize="15"
+                                   Margin="0,3"/>
+
+                        <TextBlock x:Name="AverageIncomeText"
+                                   Text="Середній місячний дохід: —"
+                                   FontSize="15"
+                                   Margin="0,3"/>
+
+                        <TextBlock x:Name="AverageExpensesText"
+                                   Text="Середні місячні витрати: —"
+                                   FontSize="15"
+                                   Margin="0,3"/>
+
+                        <TextBlock x:Name="MaxExpensesMonthText"
+                                   Text="Місяць із найбільшими витратами: —"
+                                   FontSize="15"
+                                   Margin="0,3"/>
+
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+
+                        <TextBlock x:Name="MinRemainingMonthText"
+                                   Text="Місяць із найменшим залишком: —"
+                                   FontSize="15"
+                                   Margin="0,3"/>
+
+                        <TextBlock x:Name="LargestExpenseText"
+                                   Text="Найбільша стаття витрат: —"
+                                   FontSize="15"
+                                   Margin="0,3"/>
+
+                        <TextBlock x:Name="ForecastText"
+                                   Text="Прогноз заощаджень на наступний місяць: —"
+                                   FontSize="15"
+                                   Margin="0,3"/>
+
+                    </StackPanel>
+
+                </Grid>
+
+            </GroupBox>
+
+        </Grid>
+
+    </DockPanel>
+
+</Window>

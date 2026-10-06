@@ -1,0 +1,138 @@
+﻿<Window x:Class="FamilyBudgetAnalysis.AddMonthWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Додавання місяця"
+        Height="600"
+        Width="450"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+
+    <Grid Margin="20">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Місяць:"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   VerticalAlignment="Center"
+                   Margin="0,0,10,10"/>
+
+        <TextBox x:Name="MonthTextBox"
+                 Grid.Row="0"
+                 Grid.Column="1"
+                 Margin="0,0,0,10"/>
+
+        <TextBlock Text="Основний дохід:"
+                   Grid.Row="1"
+                   Grid.Column="0"
+                   VerticalAlignment="Center"
+                   Margin="0,0,10,10"/>
+
+        <TextBox x:Name="MainIncomeTextBox"
+                 Grid.Row="1"
+                 Grid.Column="1"
+                 Margin="0,0,0,10"/>
+
+        <TextBlock Text="Додатковий дохід:"
+                   Grid.Row="2"
+                   Grid.Column="0"
+                   VerticalAlignment="Center"
+                   Margin="0,0,10,10"/>
+
+        <TextBox x:Name="AdditionalIncomeTextBox"
+                 Grid.Row="2"
+                 Grid.Column="1"
+                 Margin="0,0,0,10"/>
+
+        <TextBlock Text="Житло:"
+                   Grid.Row="3"
+                   Grid.Column="0"
+                   VerticalAlignment="Center"
+                   Margin="0,0,10,10"/>
+
+        <TextBox x:Name="HousingTextBox"
+                 Grid.Row="3"
+                 Grid.Column="1"
+                 Margin="0,0,0,10"/>
+
+        <TextBlock Text="Комунальні:"
+                   Grid.Row="4"
+                   Grid.Column="0"
+                   VerticalAlignment="Center"
+                   Margin="0,0,10,10"/>
+
+        <TextBox x:Name="UtilitiesTextBox"
+                 Grid.Row="4"
+                 Grid.Column="1"
+                 Margin="0,0,0,10"/>
+
+        <TextBlock Text="Транспорт:"
+                   Grid.Row="5"
+                   Grid.Column="0"
+                   VerticalAlignment="Center"
+                   Margin="0,0,10,10"/>
+
+        <TextBox x:Name="TransportTextBox"
+                 Grid.Row="5"
+                 Grid.Column="1"
+                 Margin="0,0,0,10"/>
+
+        <TextBlock Text="Харчування:"
+                   Grid.Row="6"
+                   Grid.Column="0"
+                   VerticalAlignment="Center"
+                   Margin="0,0,10,10"/>
+
+        <TextBox x:Name="FoodTextBox"
+                 Grid.Row="6"
+                 Grid.Column="1"
+                 Margin="0,0,0,10"/>
+
+        <TextBlock Text="Інші витрати:"
+                   Grid.Row="7"
+                   Grid.Column="0"
+                   VerticalAlignment="Center"
+                   Margin="0,0,10,10"/>
+
+        <TextBox x:Name="OtherExpensesTextBox"
+                 Grid.Row="7"
+                 Grid.Column="1"
+                 Margin="0,0,0,10"/>
+
+        <StackPanel Grid.Row="9"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+
+            <Button Content="Додати"
+                    Width="100"
+                    Height="35"
+                    Margin="0,0,10,0"
+                    Click="AddButton_Click"/>
+
+            <Button Content="Скасувати"
+                    Width="100"
+                    Height="35"
+                    Click="CancelButton_Click"/>
+
+        </StackPanel>
+
+    </Grid>
+</Window>
