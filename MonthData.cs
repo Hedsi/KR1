@@ -15,11 +15,11 @@ namespace FamilyBudgetAnalysis
         public double Food { get; set; }
         public double OtherExpenses { get; set; }
 
-        // Загальний дохід
+
         public double TotalIncome =>
             MainIncome + AdditionalIncome;
 
-        // Загальні витрати
+ 
         public double TotalExpenses =>
             Housing +
             Utilities +
@@ -27,17 +27,17 @@ namespace FamilyBudgetAnalysis
             Food +
             OtherExpenses;
 
-        // Залишок після витрат
+
         public double Remaining =>
             TotalIncome - TotalExpenses;
 
-        // Частка витрат у доході, %
+   
         public double ExpenseShare =>
             TotalIncome > 0
                 ? TotalExpenses / TotalIncome * 100
                 : 0;
 
-        // Зміна заощаджень
+  
         public double SavingsChange =>
             Remaining;
     }

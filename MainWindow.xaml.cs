@@ -23,10 +23,6 @@ namespace FamilyBudgetAnalysis
             BudgetDataGrid.ItemsSource = months;
         }
 
-        // ==========================================
-        // ДОДАВАННЯ МІСЯЦЯ
-        // ==========================================
-
         private void AddMonth_Click(object sender, RoutedEventArgs e)
         {
             AddMonthWindow window = new AddMonthWindow
@@ -43,9 +39,6 @@ namespace FamilyBudgetAnalysis
             }
         }
 
-        // ==========================================
-        // ВИДАЛЕННЯ МІСЯЦЯ
-        // ==========================================
 
         private void DeleteMonth_Click(object sender, RoutedEventArgs e)
         {
@@ -73,10 +66,6 @@ namespace FamilyBudgetAnalysis
             }
         }
 
-        // ==========================================
-        // ОЧИЩЕННЯ ДАНИХ
-        // ==========================================
-
         private void ClearData_Click(object sender, RoutedEventArgs e)
         {
             if (months.Count == 0)
@@ -98,9 +87,6 @@ namespace FamilyBudgetAnalysis
             }
         }
 
-        // ==========================================
-        // ПЕРЕВІРКА ПОЧАТКОВИХ ЗАОЩАДЖЕНЬ
-        // ==========================================
 
         private bool TryGetInitialSavings(out double value)
         {
@@ -139,9 +125,6 @@ namespace FamilyBudgetAnalysis
             return true;
         }
 
-        // ==========================================
-        // ОСНОВНИЙ РОЗРАХУНОК
-        // ==========================================
 
         private void Calculate_Click(object sender, RoutedEventArgs e)
         {
@@ -165,29 +148,23 @@ namespace FamilyBudgetAnalysis
 
             double totalRemaining = months.Sum(x => x.Remaining);
 
-            // Заощадження на кінець періоду
             double finalSavings =
                 initialSavings + totalRemaining;
 
-            // Середній дохід
             double averageIncome =
                 totalIncome / months.Count;
 
-            // Середні витрати
             double averageExpenses =
                 totalExpenses / months.Count;
 
-            // Місяць з найбільшими витратами
             MonthData maxExpensesMonth =
                 months.OrderByDescending(x => x.TotalExpenses)
                       .First();
 
-            // Місяць з найменшим залишком
             MonthData minRemainingMonth =
                 months.OrderBy(x => x.Remaining)
                       .First();
 
-            // Найбільша стаття витрат
             double housingTotal =
                 months.Sum(x => x.Housing);
 
@@ -226,9 +203,6 @@ namespace FamilyBudgetAnalysis
             else
                 largestExpense = "Інші витрати";
 
-            // ==========================================
-            // ПРОГНОЗ
-            // ==========================================
 
             double forecastMonthlySavings =
                 averageIncome - averageExpenses;
@@ -236,9 +210,6 @@ namespace FamilyBudgetAnalysis
             double forecastSavings =
                 finalSavings + forecastMonthlySavings;
 
-            // ==========================================
-            // ВИВЕДЕННЯ
-            // ==========================================
 
             TotalSavingsText.Text =
                 $"Заощадження на кінець періоду: " +
@@ -274,9 +245,6 @@ namespace FamilyBudgetAnalysis
             BudgetDataGrid.Items.Refresh();
         }
 
-        // ==========================================
-        // ОЧИЩЕННЯ РЕЗУЛЬТАТІВ
-        // ==========================================
 
         private void ClearResults_Click(object sender, RoutedEventArgs e)
         {
@@ -306,10 +274,6 @@ namespace FamilyBudgetAnalysis
             ForecastText.Text =
                 "Прогноз заощаджень на наступний місяць: —";
         }
-
-        // ==========================================
-        // ВІДКРИТТЯ ФАЙЛУ
-        // ==========================================
 
         private void OpenData_Click(object sender, RoutedEventArgs e)
         {
@@ -417,9 +381,6 @@ namespace FamilyBudgetAnalysis
                 out value);
         }
 
-        // ==========================================
-        // ЗБЕРЕЖЕННЯ ЗВІТУ
-        // ==========================================
 
         private void SaveReport_Click(object sender, RoutedEventArgs e)
         {
